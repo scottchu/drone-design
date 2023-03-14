@@ -7,6 +7,8 @@ module Standoff_Holder(
   wall=1,
   anchor=BOTTOM,
   offset=0,
+  front_flat=false,
+  front_chamfer=0,
   $ofn=10,
   $ifn=-1
 ) {
@@ -14,13 +16,30 @@ module Standoff_Holder(
   d = 0.02;
 
   difference() {
-    Standoff(
-      diameter=diameter,
-      height=height,
-      offset=wall+offset,
-      anchor=anchor,
-      $fn=$ofn
-    );
+
+    union() {
+      Standoff(
+        diameter=diameter,
+        height=height,
+        offset=(wall*2)+offset,
+        anchor=anchor,
+        $fn=$ofn
+      );
+
+      if (front_flat == true) {
+         cuboid(
+          size=[
+            diameter+(wall*2)+offset,
+            diameter/2 + wall,
+            height
+          ],
+          anchor=anchor+BACK,
+          chamfer=front_chamfer,
+          edges=[FRONT+LEFT, FRONT+RIGHT]
+        );
+      }
+    }
+
 
     translate([0, 0, -d/2])
     Standoff(
@@ -32,4 +51,13 @@ module Standoff_Holder(
   };
 }
 
-Standoff_Holder(4, 20, 2, offset=0.2, $ofn=6, $ifn=6);
+Standoff_Holder(
+  diameter=4,
+  height=20,
+  wall=1,
+  offset=0.2,
+  front_flat=true,
+  front_chamfer=0.5,
+  $ofn=6,
+  $ifn=6
+);
