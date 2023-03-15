@@ -1,8 +1,10 @@
 include <BOSL2/std.scad>;
-include <./constants.scad>;
-include <./functions.scad>;
+use <./base.scad>;
+use <./constants.scad>;
+use <./functions.scad>;
+use <../standoff/holder.scad>;
 
-module SMA_MountModel(
+module SMA_Mount_BaseShape(
   width,
   length,
   height,
@@ -47,7 +49,7 @@ module SMA_MountModel(
   };
 }
 
-module SMA_Mount(
+module SMA_Mount_Base(
   width,
   length,
   height,
@@ -66,7 +68,7 @@ module SMA_Mount(
 
 
   difference() {
-    SMA_MountModel(
+    SMA_Mount_BaseShape(
       width = width,
       length = length,
       height = height,
@@ -86,7 +88,7 @@ module SMA_Mount(
     ih = height - c;
 
     translate([0, c/2 + 0.01, -0.01])
-    SMA_MountModel(
+    SMA_Mount_BaseShape(
       width = iw,
       length = il,
       height = ih,
@@ -101,13 +103,100 @@ module SMA_Mount(
   }
 }
 
-SMA_Mount(
-  width=40,
-  length=30,
-  height=20,
-  flat_top=6,
-  angle=38,
-  chamfer=1,
-  top_back_chamfer = 1,
-  show_side=false
+module SMA_Mount_Dual(
+  width,
+  length,
+  height,
+  distance,
+  flat_top = 2,
+  angle = 30,
+  thickness = 1.5,
+  wall = 1.5,
+  chamfer = 0,
+  top_back_chamfer = 0,
+  top_back_chamfer_length = 0,
+  show_side = false,
+  standoff_diameter,
+  standoff_wall,
+  standoff_height,
+  standoff_distance,
+  standoff_offset = 0,
+  standoff_front_flat = false,
+  standoff_front_chamfer = 0,
+  $standoff_ofn = 10,
+  $standoff_ifn = 1,
+  $sma_fn=10,
+) {
+  assert(enough_space(width - distance), "Not enough space for SMA");
+
+  height = height < 0 ? standoff_height : height;
+
+  holder_width = width < 0 ? standoff_diameter*2 + standoff_wall*4 + standoff_distance - 4 : width;
+
+
+  ma = length - flat_top - thickness;
+  mb = triangle_b(ma, angle);
+  mc = triangle_c(ma, mb);
+  mid_mc = mc / 2;
+  mid_mb = triangle_b_alpha(mid_mc, angle);
+
+  a = thickness;
+  b = triangle_b(a, angle);
+  c = triangle_c(a, b);
+  mh = triangle_b(c, angle);
+  ml = triangle_c(c, mh);
+
+  Standoff_Holder_Pair(
+    diameter = standoff_diameter,
+    wall = standoff_wall,
+    height = standoff_height,
+    distance = standoff_distance,
+    offset = standoff_offset,
+    front_flat = standoff_front_flat,
+    front_chamfer = standoff_front_chamfer,
+    $ofn = $standoff_ofn,
+    $ifn = $standoff_ifn
+  );
+
+  difference() {
+    translate([0,  -(length + standoff_diameter)/2, 0])
+    SMA_Mount_Base(
+      width  = width,
+      length  = length,
+      height  = height,
+      flat_top = flat_top,
+      angle = angle,
+      thickness = thickness,
+      wall = wall,
+      chamfer = chamfer,
+      top_back_chamfer = top_back_chamfer,
+      top_back_chamfer_length = top_back_chamfer_length,
+      show_side = show_side
+    );
+
+    rotate([angle, 0, 0])
+    translate([(distance + 6) / 2,  -mid_mb, height - thickness + 0.5])
+    #SMA_Hole(height = thickness + 1, $fn = $sma_fn);
+
+    rotate([angle, 0, 0])
+    translate([-(distance + 6) / 2, -mid_mb, height - thickness + 0.5])
+    #SMA_Hole(height = thickness + 1, $fn = $sma_fn);
+  }
+
+}
+
+
+
+SMA_Mount_Dual(
+  width = 25.5,
+  length = 12,
+  height = 10,
+  distance = 7,
+  thickness=2,
+  top_back_chamfer=1,
+  standoff_diameter = 4.5,
+  standoff_wall = 2,
+  standoff_height = 10,
+  standoff_distance = 14.5,
+  $sma_fn=50
 );
