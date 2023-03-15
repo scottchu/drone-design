@@ -16,7 +16,6 @@ module Standoff_Holder(
   d = 0.02;
 
   difference() {
-
     union() {
       Standoff(
         diameter=diameter,
@@ -51,10 +50,47 @@ module Standoff_Holder(
   };
 }
 
-Standoff_Holder(
+module Standoff_Holder_Pair(
+  diameter,
+  height,
+  wall,
+  distance=0,
+  anchor = BOTTOM,
+  offset = 0,
+  front_flat = false,
+  front_chamfer = 0,
+  $ofn = 10,
+  $ifn = 1
+) {
+  dx = (distance + wall * 2 + diameter) / 2;
+
+  translate([-dx, 0, 0])
+  Standoff_Holder(
+    diameter = diameter,
+    wall = wall,
+    height = height,
+    offset = offset,
+    front_flat = front_flat,
+    front_chamfer = front_chamfer,
+    $ofn = $ofn,
+    $ifn = $ifn);
+
+  translate([dx, 0, 0])
+  Standoff_Holder(
+    diameter = diameter,
+    wall = wall,
+    height = height,
+    offset = offset,
+    front_flat = front_flat,
+    front_chamfer = front_chamfer,
+    $ofn = $ofn,
+    $ifn = $ifn);
+}
+
+Standoff_Holder_Pair(
   diameter=4,
-  height=20,
   wall=1,
+  height=20,
   offset=0.2,
   front_flat=true,
   front_chamfer=0,
