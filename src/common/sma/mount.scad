@@ -123,8 +123,8 @@ module SMA_Mount_Dual(
   standoff_offset = 0,
   standoff_front_flat = false,
   standoff_front_chamfer = 0,
-  $standoff_ofn = 10,
-  $standoff_ifn = 1,
+  standoff_ofn = 10,
+  standoff_ifn = -1,
   $sma_fn = 10,
   sma_y_offset = 0,
   show_sma_teeth_disk = false
@@ -156,8 +156,8 @@ module SMA_Mount_Dual(
     offset = standoff_offset,
     front_flat = standoff_front_flat,
     front_chamfer = standoff_front_chamfer,
-    $ofn = $standoff_ofn,
-    $ifn = $standoff_ifn
+    ofn = standoff_ofn,
+    ifn = standoff_ifn
   );
 
   difference() {
@@ -209,5 +209,6 @@ SMA_Mount_Dual(
   $sma_fn=50,
   show_side=false,
   show_sma_teeth_disk=true,
-  sma_y_offset=-0.2
+  sma_y_offset=-0.2,
+  standoff_ofn=50
 );
