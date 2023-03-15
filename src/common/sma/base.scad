@@ -3,13 +3,20 @@ include <./constants.scad>;
 
 module SMA_Hole(
   height = 2,
-  $fn = 25
+  $fn = 25,
+  show_teeth_disk = false
 ) {
-  echo($fn)
   cylinder(
     d = SMA_DIAMETER,
     h = height,
     anchor = CENTER+BOTTOM,
     $fn = $fn
   );
+
+  if (show_teeth_disk) {
+     #circle(
+      d = SMA_DIAMETER_REQUIRED,
+      $fn = $fn
+    );
+  }
 }
