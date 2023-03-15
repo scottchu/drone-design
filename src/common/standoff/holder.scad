@@ -30,7 +30,7 @@ module Standoff_Holder(
          cuboid(
           size=[
             diameter+(wall*2)+offset,
-            diameter/2 + wall,
+            diameter/2+wall+offset,
             height
           ],
           anchor=anchor+BACK,
@@ -44,7 +44,7 @@ module Standoff_Holder(
     translate([0, 0, -d/2])
     Standoff(
       diameter=diameter+offset,
-      height=height + d,
+      height=height+d,
       anchor=anchor,
       $fn=$ifn
     );
@@ -57,7 +57,7 @@ Standoff_Holder(
   wall=1,
   offset=0.2,
   front_flat=true,
-  front_chamfer=0.5,
-  $ofn=6,
+  front_chamfer=0,
+  $ofn=50,
   $ifn=6
 );
