@@ -2,6 +2,7 @@ include <BOSL2/std.scad>;
 use <./base.scad>;
 use <./constants.scad>;
 use <./functions.scad>;
+use <../functions/right_triangle.scad>;
 use <../standoff/holder.scad>;
 
 module SMA_Mount_BaseShape(
@@ -12,14 +13,15 @@ module SMA_Mount_BaseShape(
   angle,
   chamfer = 0,
   top_back_chamfer = 0,
-  top_back_chamfer_length = 0
+  top_back_chamfer_length = 0,
+  label = ""
 ) {
   pl = length - flat_top;
-  ph = wedge_height(pl, angle);
+  ph = RT_calc_a_with_b_alpha(pl, angle);
   dz = height - ph;
-  max_angle = wedge_max_height(pl, height);
+  max_angle = RT_calc_alpha_with_a_b(height, pl);
 
-  assert(angle <= max_angle, str("Angle is too large, max angle is ", max_angle));
+  assert(angle <= max_angle, str("Angle for ", label, " is too large, max angle is ", max_angle));
 
   top_back_chamfer = top_back_chamfer > 0 ? top_back_chamfer : chamfer;
 
@@ -76,12 +78,13 @@ module SMA_Mount_Base(
       angle = angle,
       chamfer = chamfer,
       top_back_chamfer = top_back_chamfer,
-      top_back_chamfer_length = top_back_chamfer_length
+      top_back_chamfer_length = top_back_chamfer_length,
+      label="outer BaseShape"
     );
 
     a = thickness;
-    b = triangle_b(a, angle);
-    c = triangle_c(a, b);
+    b = RT_calc_a_with_b_alpha(a, angle);
+    c = RT_calc_c_with_a_b(a, b);
 
     iw = width - wall * 2;
     il = length - c;
@@ -93,7 +96,8 @@ module SMA_Mount_Base(
       length = il,
       height = ih,
       flat_top = flat_top,
-      angle = angle
+      angle = angle,
+      label="inner BaseShape"
     );
 
     if (show_side == true) {
@@ -135,18 +139,17 @@ module SMA_Mount_Dual(
 
   holder_width = width < 0 ? standoff_diameter*2 + standoff_wall*4 + standoff_distance - 4 : width;
 
-
   ma = length - flat_top - thickness;
-  mb = triangle_b(ma, angle);
-  mc = triangle_c(ma, mb);
+  mb = RT_calc_a_with_b_alpha(ma, angle);
+  mc = RT_calc_c_with_a_b(ma, mb);
   mid_mc = mc / 2;
-  mid_mb = triangle_b_alpha(mid_mc, angle);
+  mid_mb = RT_calc_b_with_c_alpha(mid_mc, angle);
 
   a = thickness;
-  b = triangle_b(a, angle);
-  c = triangle_c(a, b);
-  mh = triangle_b(c, angle);
-  ml = triangle_c(c, mh);
+  b = RT_calc_a_with_b_alpha(a, angle);
+  c = RT_calc_c_with_a_b(a, b);
+  mh = RT_calc_a_with_b_alpha(c, angle);
+  ml = RT_calc_c_with_a_b(c, mh);
 
   Standoff_Holder_Pair(
     diameter = standoff_diameter,
@@ -199,6 +202,7 @@ SMA_Mount_Dual(
   length = 15,
   height = 10,
   distance = 6,
+  angle=30,
   thickness=2,
   top_back_chamfer=1,
   standoff_diameter = 4.5,
@@ -206,8 +210,8 @@ SMA_Mount_Dual(
   standoff_height = 10,
   standoff_distance = 14.5,
   $sma_fn=50,
-  show_side=false,
   show_sma_teeth_disk=true,
   sma_y_offset=-0.2,
-  standoff_ofn=50
+  standoff_ofn=50,
+  show_side=true
 );
