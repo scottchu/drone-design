@@ -192,7 +192,6 @@ module SMA_Mount_Dual(
       show_teeth_disk = show_sma_teeth_disk
     );
   }
-
 }
 
 SMA_Mount_Dual(
