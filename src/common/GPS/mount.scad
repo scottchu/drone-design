@@ -69,9 +69,7 @@ module GSP_Mount(
       clip_length = clip_length
     );
   }
-
 }
-
 
 GSP_Mount(
   base_width = 22,
