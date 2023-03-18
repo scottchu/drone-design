@@ -1,5 +1,5 @@
 include <BOSL2/std.scad>;
-include <./constants.scad>;
+include <constants.scad>;
 
 module GPS_Clip(
   width,

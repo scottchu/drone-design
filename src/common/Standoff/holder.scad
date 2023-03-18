@@ -1,5 +1,5 @@
 include <BOSL2/std.scad>;
-use <./base.scad>;
+use <base.scad>;
 
 module Standoff_Holder(
   diameter,
