@@ -1,8 +1,8 @@
 include <BOSL2/std.scad>;
-use <./base.scad>;
-use <./constants.scad>;
-use <./functions.scad>;
-use <../functions/right_triangle.scad>;
+use <base.scad>;
+use <constants.scad>;
+use <functions.scad>;
+use <../../lib/right_triangle.scad>;
 use <../standoff/holder.scad>;
 
 module SMA_Mount_BaseShape(
