@@ -8,7 +8,7 @@ module AdjustableScrewHole(
   caps = true,
   $fn = 50
 ) {
-  zrot(20)
+  zrot(-angle / 2)
   path_extrude2d(
     arc(
       d = distance,
@@ -24,6 +24,7 @@ module AdjustableScrewHole(
     anchor = BOTTOM
   );
 }
+
 
 AdjustableScrewHole(
   angle = 90,
