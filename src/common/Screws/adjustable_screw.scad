@@ -8,8 +8,7 @@ module AdjustableScrewHole(
   caps = true,
 ) {
   quality = $preview ? 30 : 60;
-  r = diameter / 2;
-  cap_angle = 1.46 * diameter;
+  cap_angle = 2.92 * diameter;
   angle = angle - cap_angle * 2;
 
   zrot(cap_angle)
@@ -23,8 +22,8 @@ module AdjustableScrewHole(
     $fn = quality
   )
   trapezoid(
-    w1 = r,
-    w2 = r,
+    w1 = diameter,
+    w2 = diameter,
     h = thickness,
     anchor = BOTTOM
   );
