@@ -22,8 +22,7 @@ module GPS_Base(
   height,
   chamfer = 2,
   screw_spec = "M1.6",
-  screw_distance = 4,
-  render = false
+  screw_distance = 4
 ) {
   difference() {
     GPS_BottomPlate(
@@ -38,7 +37,7 @@ module GPS_Base(
       spec = screw_spec,
       length = length,
       anchor = CENTER,
-      thread = render,
+      thread = !$preview,
       orient = LEFT
     );
 
@@ -47,7 +46,7 @@ module GPS_Base(
       spec = screw_spec,
       length = length,
       anchor = CENTER,
-      thread = render,
+      thread = !$preview,
       orient = LEFT
     );
   };
@@ -58,6 +57,5 @@ GPS_Base(
     length = 22,
     height = 5,
     screw_distance = 12,
-    render = false,
     $fn=50
   );

@@ -47,7 +47,6 @@ GSP_Mount(
   clip_arm_height = 6,
   clip_thickness = 2,
   clip_length = 4,
-  render=false,
   $fn = 50
 );
 

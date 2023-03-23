@@ -13,9 +13,7 @@ module GSP_Mount(
   clip_arm_height,
   clip_thickness,
   clip_length,
-  clip_distance = -1,
-  render = false
-
+  clip_distance = -1
 ) {
   clip_distance = clip_distance < 0 ? (base_width - clip_width) / 2 : clip_distance / 2;
   clip_transform_y = (base_length - clip_length + clip_arm_thickness) / 2;
@@ -25,8 +23,7 @@ module GSP_Mount(
       width = base_width,
       length = base_length + (clip_arm_thickness * 2),
       height = base_height,
-      screw_distance = screw_distance,
-      render = render
+      screw_distance = screw_distance
     );
 
     translate([
@@ -81,6 +78,5 @@ GSP_Mount(
   clip_arm_thickness = 2,
   clip_arm_height = 6,
   clip_thickness = 2,
-  clip_length = 4,
-  render=false
+  clip_length = 4
 );
