@@ -6,27 +6,33 @@ module AdjustableScrewHole(
   thickness = 2,
   diameter = 1.6,
   caps = true,
-  $fn = -1
 ) {
-  zrot(-angle / 2)
+  quality = $preview ? 30 : 60;
+  r = diameter / 2;
+  cap_angle = 1.46 * diameter;
+  angle = angle - cap_angle * 2;
+
+  zrot(cap_angle)
   path_extrude2d(
     arc(
-      d = distance,
-      angle = [0, angle]
+      r = distance,
+      angle = [0, angle],
+      n = quality
     ),
     caps = caps,
-    $fn = $fn > 0 ? $fn : angle
+    $fn = quality
   )
   trapezoid(
-    w1 = diameter,
-    w2 = diameter,
+    w1 = r,
+    w2 = r,
     h = thickness,
     anchor = BOTTOM
   );
 }
 
 AdjustableScrewHole(
-  angle = 90,
-  distance = 5,
+  diameter = 1.6,
+  angle = 30,
+  distance = 10,
   caps = true
 );
