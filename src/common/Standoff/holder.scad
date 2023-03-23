@@ -54,7 +54,7 @@ module Standoff_Holder_Pair(
   diameter,
   height,
   wall,
-  distance=0,
+  distance = 0,
   anchor = BOTTOM,
   offset = 0,
   front_flat = false,
