@@ -129,7 +129,7 @@ module SMA_Mount_Dual(
   standoff_front_chamfer = 0,
   standoff_ofn = 10,
   standoff_ifn = -1,
-  $sma_fn = 10,
+  sma_fn = 10,
   sma_y_offset = 0,
   show_sma_teeth_disk = false
 ) {
@@ -183,7 +183,7 @@ module SMA_Mount_Dual(
     translate([(distance + 6) / 2,  -mid_mb + sma_y_offset, height - thickness + 0.5])
     SMA_Hole(
       height = thickness + 1,
-      $fn = $sma_fn,
+      $fn = sma_fn,
       show_teeth_disk = show_sma_teeth_disk
     );
 
@@ -191,7 +191,7 @@ module SMA_Mount_Dual(
     translate([-(distance + 6) / 2, -mid_mb + sma_y_offset, height - thickness + 0.5])
     SMA_Hole(
       height = thickness + 1,
-      $fn = $sma_fn,
+      $fn = sma_fn,
       show_teeth_disk = show_sma_teeth_disk
     );
   }
@@ -209,7 +209,7 @@ SMA_Mount_Dual(
   standoff_wall = 2,
   standoff_height = 10,
   standoff_distance = 14.5,
-  $sma_fn=50,
+  sma_fn=50,
   show_sma_teeth_disk=true,
   sma_y_offset=-0.2,
   standoff_ofn=50,
