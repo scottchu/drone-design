@@ -21,10 +21,13 @@ module Screw_M_Hole(
   diameter = 1.6,
   length,
   anchor = CENTER,
-  thread = true,
+  thread = false,
   orient = UP,
 ) {
+  thread = thread && $preview;
+
   spec = str("M", diameter);
+
   Screw_Hole(
     spec = spec,
     length = length,
