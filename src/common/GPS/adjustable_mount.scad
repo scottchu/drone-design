@@ -62,8 +62,7 @@ module GPS_Adjustable_Mount(
   adjustable = true,
   display_info = false,
   egg_fn = 50,
-  screw_fn = 50,
-  shape_only = false
+  screw_fn = 50
 ) {
   offset = 0.2;
 
@@ -94,38 +93,36 @@ module GPS_Adjustable_Mount(
       $fn = egg_fn
     );
 
-    if (!shape_only) {
-      // Static Screw Hole
-      translate([0, -static_screw_y, 0])
-      Screw_M_Hole(
-        diameter = screw_diameter,
-        length = thickness + 0.2,
-        orient = LEFT,
-        thread = false,
-        $fn = screw_fn
-      );
+    // Static Screw Hole
+    translate([0, -static_screw_y, 0])
+    Screw_M_Hole(
+      diameter = screw_diameter,
+      length = thickness + 0.2,
+      orient = LEFT,
+      thread = false,
+      $fn = screw_fn
+    );
 
-      // Adjustable Screw Hole
-      translate([0, adjustable_screw_y, 0]) {
-        if (adjustable) {
-          translate([-adjustable_screw_thickness / 2, -screw_distance/2, 0])
-          rotate([90, 0, 90])
-          AdjustableScrewHole(
-            angle = adjustable_angle,
-            distance = screw_distance,
-            thickness = adjustable_screw_thickness,
-            diameter = screw_diameter * 1.1,
-            $fn = adjustable_angle * 3
-          );
-        } else {
-          Screw_M_Hole(
-            diameter = screw_diameter,
-            length = thickness + 0.2,
-            orient = LEFT,
-            thread = false,
-            $fn = screw_fn
-          );
-        }
+    // Adjustable Screw Hole
+    translate([0, adjustable_screw_y, 0]) {
+      if (adjustable) {
+        translate([-adjustable_screw_thickness / 2, -screw_distance/2, 0])
+        rotate([90, 0, 90])
+        AdjustableScrewHole(
+          angle = adjustable_angle,
+          distance = screw_distance,
+          thickness = adjustable_screw_thickness,
+          diameter = screw_diameter * 1.1,
+          $fn = adjustable_angle * 3
+        );
+      } else {
+        Screw_M_Hole(
+          diameter = screw_diameter,
+          length = thickness + 0.2,
+          orient = LEFT,
+          thread = false,
+          $fn = screw_fn
+        );
       }
     }
   }
@@ -184,10 +181,9 @@ module GPS_Adjustable_Mount_Outer(
     // Adjustable Screw Hole
     translate([thickness, adjustable_screw_y, 0]) {
       if (adjustable) {
-        render()
         translate([-adjustable_screw_thickness/2, -screw_distance/2, 0])
         rotate([90, 0, 90])
-        AdjustableScrewHole(
+        #AdjustableScrewHole(
           angle = adjustable_angle,
           distance = screw_distance,
           thickness = adjustable_screw_thickness,

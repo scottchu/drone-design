@@ -8,10 +8,10 @@ module AdjustableScrewHole(
   caps = true,
 ) {
   quality = $preview ? 30 : 60;
-  cap_angle = 2.92 * diameter;
+  cap_angle = 1.46 * diameter;
   angle = angle - cap_angle * 2;
 
-  zrot(cap_angle)
+  zrot(0)
   path_extrude2d(
     arc(
       r = distance,
