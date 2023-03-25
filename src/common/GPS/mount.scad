@@ -6,7 +6,7 @@ module GSP_Mount(
   base_width,
   base_length,
   base_height,
-  screw_spec,
+  screw_diameter,
   screw_distance,
   clip_width,
   clip_arm_thickness,
@@ -23,6 +23,7 @@ module GSP_Mount(
       width = base_width,
       length = base_length + (clip_arm_thickness * 2),
       height = base_height,
+      screw_diameter = screw_diameter,
       screw_distance = screw_distance
     );
 
@@ -72,7 +73,7 @@ GSP_Mount(
   base_width = 22,
   base_length = 20,
   base_height = 6,
-  screw_spec = "M1.6",
+  screw_diameter = 1.6,
   screw_distance = 12,
   clip_width = 6,
   clip_arm_thickness = 2,

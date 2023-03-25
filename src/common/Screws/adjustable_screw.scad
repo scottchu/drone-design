@@ -1,5 +1,6 @@
-include <BOSL2/std.scad>;
-include <hole.scad>;
+include <BOSL2/std.scad>
+include <constants.scad>
+include <hole.scad>
 
 $fn = 60;
 
@@ -10,7 +11,7 @@ module AdjustableScrewHole(
   diameter = 1.6,
   caps = true
 ) {
-  quality = $preview ? 15 : 60;
+  quality = $preview ? ($fn ? $fn : 10) : 60;
   cap_angle = diameter;
   angle = angle;
 
@@ -41,20 +42,19 @@ module AdjustableScrewHoles(
 
   show_meta = false
 ) {
-  true_diameter = diameter * 1.125;
+  true_diameter = diameter * SCREW_MM_Multiplier;
   true_radius = true_diameter / 2;
-  true_distance = distance + (true_diameter);
-  echo(true_distance);
+  true_distance = distance + true_diameter;
+
   dz = -length / 2;
 
   union() {
-    translate([0, true_radius, 0])
     Screw_M_Hole(
       diameter = diameter,
       length = length
     );
 
-    translate([0, true_radius, dz])
+    translate([0, 0, dz])
     AdjustableScrewHole(
       diameter = true_diameter,
       angle = angle,
@@ -71,19 +71,19 @@ module AdjustableScrewHoles(
       height = length
     )
     union() {
-      zrot(angle, cp=[0, true_radius, 0])
+      zrot(angle, cp=[0, 0, 0])
       stroke(
         path = [
-          [0, true_radius],
-          [true_distance, true_radius]
+          [0, 0],
+          [true_distance, 0]
         ],
         width = true_diameter
       );
 
       stroke(
         path = [
-          [0, true_radius],
-          [true_distance, true_radius]
+          [0, 0],
+          [true_distance, 0]
         ],
         width = true_diameter
       );

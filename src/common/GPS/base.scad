@@ -1,5 +1,6 @@
 include <BOSL2/std.scad>
 use <../screws/hole.scad>
+include <../screws/constants.scad>
 
 module GPS_BottomPlate(
   width,
@@ -21,9 +22,13 @@ module GPS_Base(
   length,
   height,
   chamfer = 2,
-  screw_spec = "M1.6",
+  screw_diameter = 1.6,
   screw_distance = 4
 ) {
+  screw_spec = str("M", screw_diameter);
+  true_diameter = screw_diameter * SCREW_MM_Multiplier;
+  true_radius = true_diameter / 2;
+
   difference() {
     GPS_BottomPlate(
       width = width,
@@ -32,23 +37,24 @@ module GPS_Base(
       chamfer = chamfer
     );
 
-    translate([0, screw_distance / 2, height / 2])
-    Screw_Hole(
-      spec = screw_spec,
-      length = length,
-      anchor = CENTER,
-      thread = !$preview,
-      orient = LEFT
-    );
+    translate([0, true_radius + screw_distance / 2, height / 2]) {
+      translate([0, -true_diameter - screw_distance, 0])
+      Screw_Hole(
+        spec = screw_spec,
+        length = length,
+        anchor = CENTER,
+        thread = !$preview,
+        orient = LEFT
+      );
 
-    translate([0, -screw_distance / 2, height / 2])
-    Screw_Hole(
-      spec = screw_spec,
-      length = length,
-      anchor = CENTER,
-      thread = !$preview,
-      orient = LEFT
-    );
+      Screw_Hole(
+        spec = screw_spec,
+        length = length,
+        anchor = CENTER,
+        thread = !$preview,
+        orient = LEFT
+      );
+    }
   };
 }
 

@@ -81,7 +81,6 @@ module GPS_Adjustable_Mount(
   echo(str("The distance between screw holes is: ", static_screw_y + adjustable_screw_y));
 
   xrot(ang)
-
   difference() {
     EggShape(
       length = length,
@@ -104,27 +103,16 @@ module GPS_Adjustable_Mount(
     );
 
     // Adjustable Screw Hole
-    translate([0, adjustable_screw_y, 0]) {
-      if (adjustable) {
-        translate([-adjustable_screw_thickness / 2, -screw_distance/2, 0])
-        rotate([90, 0, 90])
-        AdjustableScrewHole(
-          angle = adjustable_angle,
-          distance = screw_distance,
-          thickness = adjustable_screw_thickness,
-          diameter = screw_diameter * 1.1,
-          $fn = adjustable_angle * 3
-        );
-      } else {
-        Screw_M_Hole(
-          diameter = screw_diameter,
-          length = thickness + 0.2,
-          orient = LEFT,
-          thread = false,
-          $fn = screw_fn
-        );
-      }
-    }
+    translate([0, -adjustable_screw_y , 0])
+    rotate([90, 0, 90])
+    render()
+    #AdjustableScrewHole(
+      angle = adjustable_angle,
+      distance = screw_distance,
+      thickness = adjustable_screw_thickness,
+      diameter = screw_diameter * 1.1,
+      $fn = adjustable_angle * 3
+    );
   }
 }
 
