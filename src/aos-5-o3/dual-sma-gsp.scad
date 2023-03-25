@@ -34,21 +34,21 @@ SMA_Mount_Dual(
   standoff_front_flat = false
 );
 
-// translate([0, -31.26, -4.05])
-// xrot(ANGLE - 15, cp=[0, -BN220_LENGTH/2, BN220_HEIGHT/2])
-// GSP_Mount(
-//   base_width = BN220_WIDTH,
-//   base_length = BN220_LENGTH,
-//   base_height = BN220_HEIGHT,
-//   screw_diameter = 1.6,
-//   screw_distance = 12,
-//   clip_width = 6,
-//   clip_arm_thickness = 2,
-//   clip_arm_height = 6,
-//   clip_thickness = 2,
-//   clip_length = 4,
-//   $fn = 50
-// );
+translate([0, -31.26, -4.05])
+xrot(ANGLE - 15, cp=[0, -BN220_LENGTH/2, BN220_HEIGHT/2])
+GSP_Mount(
+  base_width = BN220_WIDTH,
+  base_length = BN220_LENGTH,
+  base_height = BN220_HEIGHT,
+  screw_diameter = 1.6,
+  screw_distance = 12,
+  clip_width = 6,
+  clip_arm_thickness = 2,
+  clip_arm_height = 6,
+  clip_thickness = 2,
+  clip_length = 4,
+  $fn = 50
+);
 
 translate([-(STANDOFF_DISTANCE + STANDOFF_DIAMETER)/2 - STANDOFF_WALL, 0, 0])
 GPS_SidePanel_v1(
