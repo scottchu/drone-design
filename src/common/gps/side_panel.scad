@@ -1,7 +1,7 @@
 include <BOSL2/std.scad>
 use <../../lib/polygon.scad>
-use <../Standoff/holder.scad>
-use <../AdjustableSideMount/mount.scad>
+use <../standoff/holder.scad>
+use <../adjustable-side-mount/mount.scad>
 
 module Panel_v1(
   // general
@@ -51,14 +51,14 @@ module Panel_v1(
             anchor = BOTTOM+BACK
           ) {
             edge_mask([TOP+BACK])
-            chamfer_edge_mask(l=thickness, chamfer=1, orient=DOWN);
+            chamfer_edge_mask(l = thickness, chamfer = 1, orient = DOWN);
           }
 
           translate([0, -fin_translate_y - 0.01, fin_translate_z + 0.01])
           wedge(
             size=[thickness + 0.01, fin_y + 0.01, fin_z + 0.01],
             anchor = BOTTOM+FRONT,
-            orient=DOWN
+            orient = DOWN
           );
         }
       }
@@ -73,7 +73,7 @@ module Panel_v1(
         anchor = TOP+FRONT
       ) {
         edge_mask([BOTTOM+FRONT])
-        chamfer_edge_mask(l=thickness, chamfer=1, orient=DOWN);
+        chamfer_edge_mask(l = thickness, chamfer = 1, orient = DOWN);
       }
 
       translate([0, -fin_translate_y + bottom_length + 0.01, 0])
