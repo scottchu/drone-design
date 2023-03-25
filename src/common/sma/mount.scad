@@ -1,9 +1,9 @@
-include <BOSL2/std.scad>;
-use <base.scad>;
-use <constants.scad>;
-use <functions.scad>;
-use <../../lib/right_triangle.scad>;
-use <../standoff/holder.scad>;
+include <BOSL2/std.scad>
+use <../../lib/right_triangle.scad>
+use <../../spec/sma.scad>
+use <../standoff/holder.scad>
+use <base.scad>
+use <functions.scad>
 
 module SMA_Mount_BaseShape(
   width,
@@ -198,20 +198,19 @@ module SMA_Mount_Dual(
 }
 
 SMA_Mount_Dual(
-  width = 25.5,
+  width = 30,
   length = 15,
   height = 10,
   distance = 6,
-  angle=30,
-  thickness=2,
-  top_back_chamfer=1,
+  angle = 30,
+  thickness = 2,
+  top_back_chamfer = 1,
   standoff_diameter = 4.5,
   standoff_wall = 2,
   standoff_height = 10,
   standoff_distance = 14.5,
-  sma_fn=50,
-  show_sma_teeth_disk=true,
-  sma_y_offset=-0.2,
-  standoff_ofn=50,
-  show_side=true
+  sma_fn = 50,
+  show_sma_teeth_disk = true,
+  sma_y_offset = -0.2,
+  standoff_ofn = 50
 );

@@ -1,5 +1,5 @@
-include <BOSL2/std.scad>;
-include <constants.scad>;
+include <BOSL2/std.scad>
+include <../../spec/sma.scad>
 
 module SMA_Hole(
   height = 2,
@@ -20,3 +20,5 @@ module SMA_Hole(
     );
   }
 }
+
+SMA_Hole(show_teeth_disk = true, $fn = 120);

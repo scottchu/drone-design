@@ -1,5 +1,6 @@
-include <constants.scad>;
+include <../../spec/sma.scad>
 
-function enough_space(width) = width > SMA_DIAMETER_REQUIRED ? 1 : 0;
+function enough_space(value) =
+  value > SMA_DIAMETER_REQUIRED ? 1 : 0;
 
 
