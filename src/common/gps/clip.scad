@@ -1,4 +1,4 @@
-include <BOSL2/std.scad>;
+include <BOSL2/std.scad>
 
 module GPS_Clip(
   width,
@@ -10,38 +10,38 @@ module GPS_Clip(
   union() {
     difference() {
       cuboid(
-        size=[
+        size = [
           width,
           arm_thickness + clip_length,
           height + clip_thickness
         ],
-        chamfer=1,
-        edges=[TOP+BACK, TOP+FRONT],
-        anchor=BOTTOM
+        chamfer = 1,
+        edges = [TOP+BACK, TOP+FRONT],
+        anchor = BOTTOM
       );
 
-      translate([0, -arm_thickness/2, -0.01])
+      translate([0, -arm_thickness / 2, -0.01])
       cuboid(
-        size=[
+        size= [
           width + 0.2,
           clip_length + 0.1,
           height/2 + 0.02
         ],
-        chamfer=1.5,
-        edges=[BOTTOM+BACK],
-        anchor=BOTTOM
+        chamfer = 1.5,
+        edges = [BOTTOM+BACK],
+        anchor = BOTTOM
       );
 
-      translate([0, -arm_thickness/2, height/2])
+      translate([0, -arm_thickness / 2, height / 2])
       cuboid(
         size=[
           width + 0.2,
           clip_length + 0.1,
-          height/2
+          height / 2
         ],
-        chamfer=0.5,
-        edges=[TOP+BACK, TOP+FRONT],
-        anchor=BOTTOM
+        chamfer = 0.5,
+        edges = [TOP+BACK, TOP+FRONT],
+        anchor = BOTTOM
       );
     };
   }

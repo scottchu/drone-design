@@ -1,6 +1,6 @@
 include <BOSL2/std.scad>
-use <../screws/hole.scad>
-include <../screws/constants.scad>
+use <../screw/hole.scad>
+include <../../spec/screw.scad>
 
 module GPS_BottomPlate(
   width,
@@ -13,7 +13,7 @@ module GPS_BottomPlate(
     size = [width, length, height],
     chamfer = chamfer,
     edges = edges,
-    anchor=BOTTOM
+    anchor = BOTTOM
   );
 }
 
@@ -63,5 +63,5 @@ GPS_Base(
     length = 22,
     height = 5,
     screw_distance = 12,
-    $fn=50
+    $fn = 50
   );
