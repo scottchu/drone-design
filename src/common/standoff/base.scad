@@ -1,17 +1,15 @@
-include <BOSL2/std.scad>;
+include <BOSL2/std.scad>
 
 module Standoff(
   diameter,
   height,
-  offset=0,
-  anchor=BOTTOM,
-  $fn=10
+  offset = 0,
+  anchor = BOTTOM
 ) {
   cylinder(
-    h=height,
-    d=diameter + offset,
-    anchor=anchor,
-    $fn=$fn
+    h = height,
+    d = diameter + offset,
+    anchor = anchor
   );
 }
 
