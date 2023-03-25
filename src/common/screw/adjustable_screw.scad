@@ -1,8 +1,6 @@
 include <BOSL2/std.scad>
-include <constants.scad>
+include <../../spec/screw.scad>
 include <hole.scad>
-
-$fn = 60;
 
 module AdjustableScrewHole(
   angle = 45,
@@ -98,5 +96,6 @@ AdjustableScrewHoles(
   distance = 10,
   length = 2,
   caps = true,
-  show_meta = true
+  show_meta = true,
+  $fn = 30
 );
