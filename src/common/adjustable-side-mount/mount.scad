@@ -1,8 +1,8 @@
 include <BOSL2/std.scad>
-use <base.scad>
-use <../Screws/adjustable_screw.scad>
-include <../Screws/constants.scad>
 include <../../lib/render.scad>
+include <../../spec/screw.scad>
+use <../screw/adjustable_screw.scad>
+use <base.scad>
 
 function adjustable_length(screw_diameter, screw_distance, angle) =
   hyp_ang_to_adj(hyp = (screw_diameter + screw_distance), ang = angle);
@@ -69,7 +69,7 @@ GPS_Adjustable_Mount(
   adjustable_angle = 30,
   base_multiplier = 3,
   base_length_offset = 0.1225,
-  base_scale = [1.2, 1.2],
+  base_scale = [1.1, 1.2],
   screw_diameter = 1.6,
   screw_distance = 12
 );
