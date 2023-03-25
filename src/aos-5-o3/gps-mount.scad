@@ -9,6 +9,7 @@ clip_thickness = 2;
 clip_length = 4;
 $fn = 50;
 
+color([0.75, 0.25, 0.25, 0.75])
 GSP_Mount(
   base_width = BN220_WIDTH,
   base_length = BN220_LENGTH,
@@ -21,3 +22,10 @@ GSP_Mount(
   clip_thickness = clip_thickness,
   clip_length = clip_length
 );
+
+color([0, 0.75, 0.5, 0.75])
+translate([0, 4.65, 5])
+xrot(-30)
+zrot(180)
+translate([0, -70, 0])
+import("stl/BN220_Mount.stl");

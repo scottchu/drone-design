@@ -2,35 +2,27 @@ include <../common/GPS/BN220.scad>
 use <../common/GPS/mount.scad>
 use <../common/GPS/side_panel.scad>
 use <../common/SMA/mount.scad>
-
-STANDOFF_DIAMETER = 4.5;
-STANDOFF_WALL = 2;
-STANDOFF_HEIGHT = 10;
-STANDOFF_DISTANCE = 16.5;
-
-ANGLE = 30;
-
-SMA_MOUNT_LENGTH = 15;
+include <spec.scad>
 
 translate([0, 0, 10])
 SMA_Mount_Dual(
-  width = 29.3,
+  width = SMA_MOUNT_WIDTH,
   length = SMA_MOUNT_LENGTH,
-  height = 10,
-  distance = 8,
-  angle=ANGLE,
-  thickness = 2,
+  height = SMA_MOUNT_HEIGHT,
+  distance = SMA_DISTANCE,
+  angle = SMA_ANGLE,
+  thickness = SMA_MOUNT_THICKNESS,
   top_back_chamfer = 1,
-  sma_fn = 50,
-  show_sma_teeth_disk = false,
-  sma_y_offset = -0.5,
+  sma_fn = 60,
+  show_sma_teeth_disk = true,
+  sma_y_offset = SMA_Y_OFFSET,
 
   standoff_diameter = STANDOFF_DIAMETER,
   standoff_wall = STANDOFF_WALL,
-  standoff_height = STANDOFF_HEIGHT,
+  standoff_height = SMA_STANDOFF_HEIGHT,
   standoff_distance = STANDOFF_DISTANCE,
-  standoff_ofn = 6,
-  standoff_ifn = 30,
+  standoff_ofn = STANDOFF_OUTER_SIDES,
+  standoff_ifn = STANDOFF_INNER_SIDES,
   standoff_front_flat = false
 );
 
@@ -53,7 +45,7 @@ GPS_SidePanel_v1(
 
   standoff_diameter = STANDOFF_DIAMETER,
   standoff_wall = STANDOFF_WALL,
-  standoff_height = STANDOFF_HEIGHT,
+  standoff_height = STANDOFF_HEIGHT / 2,
   standoff_ofn = 6,
   standoff_ifn = 30,
   standoff_front_flat = false,
@@ -88,7 +80,7 @@ GPS_SidePanel_v1(
 
   standoff_diameter = STANDOFF_DIAMETER,
   standoff_wall = STANDOFF_WALL,
-  standoff_height = STANDOFF_HEIGHT,
+  standoff_height = STANDOFF_HEIGHT / 2,
   standoff_ofn = 6,
   standoff_ifn = 30,
   standoff_front_flat = false,
