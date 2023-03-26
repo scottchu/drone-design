@@ -2,13 +2,17 @@ include <BOSL2/std.scad>
 include <spec.scad>
 use <gps-side-panel.scad>
 
-distance = (STANDOFF_DISTANCE + STANDOFF_DIAMETER) + STANDOFF_WALL * 2;
+module AOS_5_o3_GPS_SidePanels_Flat() {
+  distance = (STANDOFF_DISTANCE + STANDOFF_DIAMETER) + STANDOFF_WALL * 2;
 
-distribute(distance) {
-  yrot(90)
-  GPS_SidePanel();
+  distribute(distance) {
+    yrot(90)
+    AOS_5_o3_GPS_SidePanel();
 
-  yrot(-90)
-  mirror([1, 0, 0])
-  GPS_SidePanel();
+    yrot(-90)
+    mirror([1, 0, 0])
+    AOS_5_o3_GPS_SidePanel();
+  }
 }
+
+AOS_5_o3_GPS_SidePanels_Flat();
