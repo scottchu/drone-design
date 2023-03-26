@@ -1,4 +1,4 @@
-include <../common/GPS/BN220.scad>
+include <../spec/gps/bn220.scad>
 use <../common/GPS/mount.scad>
 use <../common/GPS/side_panel.scad>
 use <../common/SMA/mount.scad>

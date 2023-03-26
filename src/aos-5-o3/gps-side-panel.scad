@@ -1,99 +1,49 @@
 include <spec.scad>
 use <../common/GPS/side_panel.scad>
 
-panel_thickness = 2;
-panel_length = 40;
-
-arm_length = 15;
-arm_height = 10;
-arm_shift = -1.15;
-
-fin_height = 2.5;
-fin_length = 8;
-fin_angle = 30;
-
-bottom_height = 4;
-bottom_angle = 30;
-bottom_length = 35;
-
-mount_screw_diameter = 1.6;
-mount_screw_distance = 12;
-mount_thickness = 2.5;
-mount_base_multiplier = 3;
-mount_base_scale = [1.2, 1.2];
-mount_offset = [0, 0];
-mount_adjustable_angle = 25;
-
-distribute(
-  (STANDOFF_DISTANCE + STANDOFF_DIAMETER)/2 + STANDOFF_WALL + 2
-) {
-  yrot(90)
+module AOS_5_o3_GPS_SidePanel() {
   GPS_SidePanel_v1(
-    thickness = panel_thickness,
-    length = panel_length,
+    thickness = PANEL_THICKNESS,
+    length = PANEL_LENGTH,
 
-    arm_length = arm_length,
-    arm_height = arm_height,
-    arm_shift = arm_shift,
+    arm_length = ARM_LENGTH,
+    arm_height = ARM_HEIGHT,
+    arm_shift = ARM_SHIFT,
 
-    fin_height = fin_height,
-    fin_length = fin_length,
-    fin_angle = fin_angle,
+    fin_height = FIN_HEIGHT,
+    fin_length = FIN_LENGTH,
+    fin_angle = FIN_ANGLE,
 
-    bottom_height = bottom_height,
-    bottom_angle = bottom_angle,
-    bottom_length = bottom_length,
+    bottom_height = BOTTOM_HEIGHT,
+    bottom_angle = BOTTOM_ANGLE,
+    bottom_length = BOTTOM_LENGTH,
 
     standoff_diameter = STANDOFF_DIAMETER,
     standoff_wall = STANDOFF_WALL,
-    standoff_height = STANDOFF_HEIGHT,
+    standoff_height = PANEL_STANDOFF_HEIGHT,
     standoff_ofn = STANDOFF_OUTER_SIDES,
     standoff_ifn = STANDOFF_INNER_SIDES,
-    standoff_front_flat = false,
+    standoff_front_flat = STANDOFF_FRONT_FLAT,
 
-    mount_screw_diameter = mount_screw_diameter,
-    mount_screw_distance = mount_screw_distance,
-    mount_thickness = mount_thickness,
-    mount_base_multiplier = mount_base_multiplier,
-    mount_base_scale = mount_base_scale,
-    mount_offset = mount_offset,
-    mount_adjustable_angle = mount_adjustable_angle
+    mount_screw_diameter = MOUNT_SCREW_DIAMETER,
+    mount_screw_distance = MOUNT_SCREW_DISTANCE,
+    mount_thickness = MOUNT_THICKNESS,
+    mount_base_multiplier = MOUNT_BASE_MULTIPLIER,
+    mount_base_scale = MOUNT_BASE_SCALE,
+    mount_offset = MOUNT_OFFSET,
+    mount_adjustable_angle = MOUNT_ADJUSTABLE_ANGLE
   );
-
-
-  translate([(STANDOFF_DISTANCE + STANDOFF_DIAMETER)/2 + STANDOFF_WALL, 0, 0])
-  yrot(-90)
-  mirror([1, 0, 0])
-  GPS_SidePanel_v1(
-    thickness = panel_thickness,
-    length = panel_length,
-
-    arm_length = arm_length,
-    arm_height = arm_height,
-    arm_shift = arm_shift,
-
-    fin_height = fin_height,
-    fin_length = fin_length,
-    fin_angle = fin_angle,
-
-    bottom_height = bottom_height,
-    bottom_angle = bottom_angle,
-    bottom_length = bottom_length,
-
-    standoff_diameter = STANDOFF_DIAMETER,
-    standoff_wall = STANDOFF_WALL,
-    standoff_height = STANDOFF_HEIGHT,
-    standoff_ofn = STANDOFF_OUTER_SIDES,
-    standoff_ifn = STANDOFF_INNER_SIDES,
-    standoff_front_flat = false,
-
-    mount_screw_diameter = mount_screw_diameter,
-    mount_screw_distance = mount_screw_distance,
-    mount_thickness = mount_thickness,
-    mount_base_multiplier = mount_base_multiplier,
-    mount_base_scale = mount_base_scale,
-    mount_offset = mount_offset,
-    mount_adjustable_angle = mount_adjustable_angle
-  );
-
 }
+
+module AOS_5_o3_GPS_SidePanels() {
+  distance = (STANDOFF_DISTANCE + STANDOFF_DIAMETER) + STANDOFF_WALL * 2;
+
+  distribute(distance) {
+    AOS_5_o3_GPS_SidePanel();
+
+    mirror([1, 0, 0])
+    AOS_5_o3_GPS_SidePanel();
+  }
+}
+
+AOS_5_o3_GPS_SidePanels();
