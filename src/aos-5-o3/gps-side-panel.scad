@@ -1,8 +1,8 @@
 include <spec.scad>
-use <../common/GPS/side_panel.scad>
+use <../common/GPS/side-panel/mount-panel-with-immortal-t.scad>
 
 module AOS_5_o3_GPS_SidePanel() {
-  GPS_SidePanel_v1(
+  GPS_SidePanel_with_ImmortalT_v1(
     thickness = PANEL_THICKNESS,
     length = PANEL_LENGTH,
 
@@ -31,7 +31,8 @@ module AOS_5_o3_GPS_SidePanel() {
     mount_base_multiplier = MOUNT_BASE_MULTIPLIER,
     mount_base_scale = MOUNT_BASE_SCALE,
     mount_offset = MOUNT_OFFSET,
-    mount_adjustable_angle = MOUNT_ADJUSTABLE_ANGLE
+    mount_adjustable_angle = MOUNT_ADJUSTABLE_ANGLE,
+    antenna_offset = ANTENNA_OFFSET
   );
 }
 

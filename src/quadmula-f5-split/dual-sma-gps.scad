@@ -8,7 +8,7 @@ use <sma.scad>
 translate([0, 0, 10])
 Quadmula_F5_DualSMA_Mount();
 
-translate([0, -31.50, -4.05])
+translate([0, -30, -4.05])
 xrot(30 - 15, cp=[0, -BN220_LENGTH / 2, BN220_HEIGHT / 2])
 Quadmula_F5_GPS_Mount();
 

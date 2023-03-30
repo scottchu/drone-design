@@ -1,8 +1,8 @@
 include <spec.scad>
-use <../common/GPS/side_panel.scad>
+use <../common/GPS/side-panel/mount-panel-with-immortal-t.scad>
 
 module Quadmula_F5_GPS_SidePanel() {
-  GPS_SidePanel_v1(
+  GPS_SidePanel_with_ImmortalT_v1(
     thickness = PANEL_THICKNESS,
     length = PANEL_LENGTH,
 
@@ -47,3 +47,7 @@ module Quadmula_F5_GPS_SidePanels() {
 }
 
 Quadmula_F5_GPS_SidePanels();
+
+import("../../stl/SF5_Antenna_Tube_4mm_Type2.stl");
+// import("../../stl/SF5_Antenna_SMA_Mid_Split.stl");
+// import("../../stl/SF5_Antenna_T_915.stl");

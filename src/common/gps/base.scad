@@ -43,7 +43,7 @@ module GPS_Base(
         spec = screw_spec,
         length = length,
         anchor = CENTER,
-        thread = !$preview,
+        thread = false,
         orient = LEFT
       );
 
@@ -51,7 +51,7 @@ module GPS_Base(
         spec = screw_spec,
         length = length,
         anchor = CENTER,
-        thread = !$preview,
+        thread = false,
         orient = LEFT
       );
     }
