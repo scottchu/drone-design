@@ -1,7 +1,7 @@
-include <../spec/gps/bn220.scad>
-use <../common/GPS/mount.scad>
-use <../common/GPS/side_panel.scad>
-use <../common/SMA/mount.scad>
+include <../../spec/gps/bn220.scad>
+use <../../common/GPS/mount.scad>
+use <../../common/GPS/side_panel.scad>
+use <../../common/SMA/mount.scad>
 include <spec.scad>
 
 translate([0, 0, 10])

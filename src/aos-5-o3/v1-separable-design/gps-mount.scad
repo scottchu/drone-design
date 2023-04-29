@@ -1,5 +1,5 @@
-include <../spec/gps/bn220.scad>
-use <../common/gps/mount.scad>
+include <../../spec/gps/bn220.scad>
+use <../../common/gps/mount.scad>
 include <spec.scad>
 
 module AOS_5_o3_GPS_Mount() {

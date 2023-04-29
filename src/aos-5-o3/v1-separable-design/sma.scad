@@ -1,4 +1,4 @@
-use <../common/SMA/mount.scad>
+use <../../common/SMA/mount.scad>
 include <spec.scad>
 
 module AOS_5_o3_DualSMA_Mount() {

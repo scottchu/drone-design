@@ -1,5 +1,5 @@
 include <spec.scad>
-use <../common/GPS/side-panel/mount-panel-with-immortal-t.scad>
+use <../../common/GPS/side-panel/mount-panel-with-immortal-t.scad>
 
 module AOS_5_o3_GPS_SidePanel() {
   GPS_SidePanel_with_ImmortalT_v1(
