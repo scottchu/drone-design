@@ -202,8 +202,8 @@ module SMA_Mount_Base(
 //! @param standoff_offset Additional offset for standoff fit (default: 0)
 //! @param standoff_front_flat If true, creates flat front face on standoffs (default: false)
 //! @param standoff_front_chamfer Chamfer for standoff front face (default: 0)
-//! @param standoff_ofn Number of sides for standoff outer shape (default: 10)
-//! @param standoff_ifn Number of sides for standoff inner hole (default: -1, uses ofn)
+//! @param standoff_outer_facets Number of sides for standoff outer shape (default: 10)
+//! @param standoff_inner_facets Number of sides for standoff inner hole (default: -1, uses outer_facets)
 //! @param sma_fn Number of facets for SMA holes (default: 10, optimized in preview)
 //! @param sma_position_y_offset Y-axis offset for SMA hole positioning (default: 0)
 //! @param show_sma_clearance If true, shows visualization of required clearance (default: false)
@@ -227,8 +227,8 @@ module SMA_Mount_Dual(
   standoff_offset = 0,
   standoff_front_flat = false,
   standoff_front_chamfer = 0,
-  standoff_ofn = 10,
-  standoff_ifn = -1,
+  standoff_outer_facets = 10,
+  standoff_inner_facets = -1,
   sma_fn = 10,
   sma_position_y_offset = 0,
   show_sma_clearance = false
@@ -246,12 +246,12 @@ module SMA_Mount_Dual(
   assert(standoff_height > 0, "Standoff height must be positive");
   assert(standoff_distance > 0, "Standoff distance must be positive");
   assert(sma_fn > 0, "SMA $fn must be positive");
-  assert(standoff_ofn > 0, "Standoff outer $fn must be positive");
+  assert(standoff_outer_facets > 0, "Standoff outer facets must be positive");
 
   // Optimize detail for preview mode (faster preview, full detail for render)
   is_preview_mode = $preview;
-  preview_standoff_ofn = is_preview_mode ? max(6, standoff_ofn / 4) : standoff_ofn;
-  preview_standoff_ifn = is_preview_mode && standoff_ifn > 0 ? max(6, standoff_ifn / 4) : standoff_ifn;
+  preview_standoff_outer_facets = is_preview_mode ? max(6, standoff_outer_facets / 4) : standoff_outer_facets;
+  preview_standoff_inner_facets = is_preview_mode && standoff_inner_facets > 0 ? max(6, standoff_inner_facets / 4) : standoff_inner_facets;
   preview_sma_fn = is_preview_mode ? max(8, sma_fn / 4) : sma_fn;
 
   actual_height = height < 0 ? standoff_height : height;
@@ -266,8 +266,8 @@ module SMA_Mount_Dual(
     offset=standoff_offset,
     front_flat=standoff_front_flat,
     front_chamfer=standoff_front_chamfer,
-    ofn=preview_standoff_ofn,
-    ifn=preview_standoff_ifn
+    outer_facets=preview_standoff_outer_facets,
+    inner_facets=preview_standoff_inner_facets
   );
 
   // Helper module to create SMA hole cutout on angled surface
@@ -318,5 +318,5 @@ SMA_Mount_Dual(
   sma_fn=50,
   show_sma_clearance=false,
   sma_position_y_offset=-0.2,
-  standoff_ofn=50
+  standoff_outer_facets=50
 );
